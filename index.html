@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ContextForge · 研究助手</title>
+  <style>
+    :root{--bg:#f7f8f5;--paper:#fff;--ink:#213a32;--muted:#75827a;--line:#e2e8df;--green:#365d45;--soft:#edf3e9}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.45}button:focus-visible,a:focus-visible,textarea:focus-visible,label:focus-within{outline:3px solid #a4bc76;outline-offset:3px}
+    header{height:84px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 5vw;background:#fff} .brand{display:flex;align-items:center;gap:12px;font-size:20px;font-weight:650;letter-spacing:-.7px}.logo{background:var(--green);color:#fff;border-radius:12px;width:38px;height:38px;display:grid;place-items:center;font-size:24px}.status{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px}.dot{width:7px;height:7px;background:#c8b074;border-radius:50%}
+    main{max-width:1240px;margin:auto;padding:48px 32px}.eyebrow{font-size:11px;letter-spacing:2px;color:var(--green);font-weight:650}h1{font-size:36px;letter-spacing:-1.5px;line-height:1.3;margin:9px 0 12px} .intro{color:var(--muted);margin:0 0 32px}.layout{display:grid;grid-template-columns:300px 1fr;gap:24px;align-items:start}.panel{background:var(--paper);border:1px solid var(--line);border-radius:18px;overflow:hidden}.sidebar{padding:24px}h2{font-size:16px;margin:0}.heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}.badge{font-size:11px;color:var(--muted);background:var(--bg);padding:3px 9px;border-radius:20px}.drop{display:block;border:1px dashed #bdcbb9;background:#fafcf8;border-radius:12px;padding:29px 14px;text-align:center;cursor:pointer;transition:.2s}.drop:hover,.drop.drag{background:var(--soft);border-color:var(--green)}.upload-icon{font-size:27px;display:block;margin-bottom:8px}.small{font-size:12px;color:var(--muted)}.drop strong{display:block;font-size:13px;font-weight:500}.file-input{position:absolute;width:1px;height:1px;opacity:0}.files{list-style:none;padding:0;margin:16px 0}.files li{display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line);padding:12px 0}.file-icon{font-size:10px;color:var(--green);padding:7px;background:var(--soft);border-radius:6px}.file-name{overflow-wrap:anywhere;font-size:12px;flex:1}.remove{background:none;border:0;color:var(--muted);padding:6px;font-size:18px}.note{margin:23px 0 0;padding-top:18px;border-top:1px solid var(--line)}.note p{font-size:12px;color:var(--muted);margin:5px 0}.note strong{font-size:12px;font-weight:500}
+    .workspace{min-height:590px;display:flex;flex-direction:column}.workspace-head{padding:19px 25px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.clear{font-size:12px;border:0;background:none;color:var(--muted)}.messages{padding:28px;flex:1;max-height:560px;overflow:auto}.welcome{text-align:center;padding:36px 10px}.spark{display:grid;place-items:center;width:54px;height:54px;border-radius:16px;background:var(--soft);margin:0 auto 18px;font-size:27px}.welcome h3{font-size:23px;font-weight:500;margin:0 0 8px}.welcome p{color:var(--muted);font-size:13px;margin:0 auto;max-width:370px}.suggestions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:28px auto 0;max-width:490px}.suggestion{text-align:left;background:#fff;border:1px solid var(--line);border-radius:10px;padding:13px;font-size:12px;color:var(--green)}.suggestion:hover{background:var(--bg)}.composer{padding:0 24px 20px}.input-wrap{border:1px solid #cad6c4;border-radius:13px;padding:13px;background:#fcfdfa}textarea{width:100%;resize:vertical;min-height:64px;max-height:220px;background:transparent;border:0;color:var(--ink);outline:none;padding:0}textarea::placeholder{color:#939f91;font-size:13px}.input-footer{display:flex;justify-content:space-between;align-items:center;gap:10px}.send{border:0;background:var(--green);color:#fff;padding:8px 17px;border-radius:8px;font-size:12px}.hint{margin:10px 0 0;font-size:11px;text-align:center;color:var(--muted)}.message{margin-bottom:22px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}.message.user{margin-left:12%;background:var(--soft);padding:12px 16px;border-radius:12px}.message.assistant{padding:4px 0}.speaker{display:block;font-size:11px;color:var(--muted);margin-bottom:6px;letter-spacing:.5px}.sources{margin-top:12px;border-top:1px solid var(--line);padding-top:10px;font-size:12px;color:var(--green)}.error{color:#9c543b;background:#fbf3ee;border-radius:9px;padding:10px 12px;font-size:12px;margin:10px 0;white-space:pre-wrap}footer{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:23px}
+    @media(max-width:760px){header{padding:0 22px;height:70px}.brand{font-size:17px}main{padding:28px 18px}.layout{grid-template-columns:1fr}h1{font-size:29px}.sidebar{padding:20px}.drop{padding:16px}.workspace{min-height:510px}.welcome{padding:18px 0}.messages{padding:20px}.composer{padding:0 16px 18px}.suggestions{grid-template-columns:1fr}.status{font-size:10px}.note{display:none}footer{gap:15px}}
+  </style>
+</head>
+<body>
+  <header><div class="brand"><span class="logo" aria-hidden="true">✳</span>ContextForge</div><div class="status" id="connection"><span class="dot"></span>等待连接 AI</div></header>
+  <main>
+    <div class="eyebrow">YOUR PERSONAL RESEARCH SPACE</div>
+    <h1>让资料，成为答案。</h1>
+    <p class="intro">上传文档，提出问题。从你的资料中发现线索，每一步都有据可查。</p>
+    <div class="layout">
+      <aside class="panel sidebar">
+        <div class="heading"><h2>资料库</h2><span class="badge" id="count">0 个文件</span></div>
+        <label class="drop" id="drop"><input class="file-input" id="files" type="file" accept=".pdf,application/pdf" multiple><span class="upload-icon" aria-hidden="true">↥</span><strong>点击选择，或将 PDF 拖到这里</strong><span class="small">最多 5 个 · 每个最大 20 MB</span></label>
+        <ul class="files" id="file-list"></ul>
+        <div id="file-error" role="alert"></div>
+        <p class="small" id="empty-files">还没有资料，先添加一篇文档吧。</p>
+        <div class="note"><strong>让回答有出处</strong><p>系统根据 PDF 文字回答，并展示来源页码。扫描版文档需先转为可选择文字的 PDF。</p><p>点击提问后，文档文字会通过 Python 发送至所选 AI 服务（Gemini / OpenAI）生成回答。每次提问独立处理。</p></div>
+      </aside>
+      <section class="panel workspace" aria-label="研究对话">
+        <div class="workspace-head"><h2>与资料对话</h2><button class="clear" id="clear">清空对话 ↺</button></div>
+        <div class="messages" id="messages" aria-live="polite"><div class="welcome" id="welcome"><div class="spark" aria-hidden="true">✧</div><h3>你的下一个发现，从提问开始</h3><p>先添加 PDF，再告诉我你想了解什么。可以从一个简单的问题开始。</p><div class="suggestions"><button class="suggestion">这篇文档的核心观点是什么？ ↗</button><button class="suggestion">总结研究方法与主要结论。 ↗</button></div></div></div>
+        <form class="composer" id="form"><div class="input-wrap"><textarea id="question" aria-label="你的问题" placeholder="针对你的资料，问一个问题……" maxlength="8000" required></textarea><div class="input-footer"><span class="small">Enter 发送 · Shift + Enter 换行</span><button class="send" id="send" type="submit" disabled>提问 ↗</button></div></div><div id="request-error" role="alert"></div><p class="hint">AI 回答可能存在错误，请结合原始资料核实。</p></form>
+      </section>
+    </div>
+    <footer><span>CONTEXTFORGE / 个人研究助手</span><span>阅读 · 提问 · 探索</span></footer>
+  </main>
+  <script>
+    // Python interface: POST /api/ask with multipart fields question and files.
+    // Response: {answer: "...", sources: [{filename: "paper.pdf", page: 1, excerpt: "..."}]}.
+    // When opened directly, connect to a local Python server on port 8000.
+    const API_BASE = location.protocol === 'file:' ? 'http://127.0.0.1:8000' : '';
+    const $ = id => document.getElementById(id);
+    let selected = [], busy = false;
+    function refresh() {
+      $('count').textContent = `${selected.length} 个文件`;
+      $('empty-files').hidden = selected.length > 0;
+      $('file-list').replaceChildren();
+      selected.forEach((file, index) => {
+        const row = document.createElement('li');
+        const icon = document.createElement('span'); icon.className = 'file-icon'; icon.textContent = 'PDF';
+        const name = document.createElement('span'); name.className = 'file-name'; name.textContent = file.name;
+        const remove = document.createElement('button'); remove.type = 'button'; remove.className = 'remove'; remove.textContent = '×'; remove.disabled = busy; remove.setAttribute('aria-label', `移除 ${file.name}`);
+        remove.onclick = () => {selected.splice(index, 1); refresh();};
+        row.append(icon, name, remove); $('file-list').append(row);
+      });
+      $('send').disabled = busy || !selected.length || !$('question').value.trim();
+      $('files').disabled = busy;
+      $('clear').disabled = busy;
+    }
+    function showError(id, text) {$(id).textContent = text; $(id).className = text ? 'error' : '';}
+    function addFiles(files) {
+      if (busy) return;
+      const errors = [];
+      for (const file of files) {
+        if (!/\.pdf$/i.test(file.name)) {errors.push(`${file.name}：请选择 PDF 文件。`); continue;}
+        if (!file.size || file.size > 20 * 1024 * 1024) {errors.push(`${file.name}：文件为空或超过 20 MB。`); continue;}
+        if (selected.length >= 5) {errors.push('最多添加 5 个文件。'); break;}
+        if (!selected.some(f => f.name === file.name && f.size === file.size && f.lastModified === file.lastModified)) selected.push(file);
+      }
+      showError('file-error', errors.join('\n')); refresh();
+    }
+    $('files').onchange = e => {addFiles(e.target.files); e.target.value = '';};
+    ['dragenter','dragover'].forEach(event => $('drop').addEventListener(event, e => {e.preventDefault(); $('drop').classList.add('drag');}));
+    ['dragleave','drop'].forEach(event => $('drop').addEventListener(event, e => {e.preventDefault(); $('drop').classList.remove('drag');}));
+    $('drop').addEventListener('drop', e => addFiles(e.dataTransfer.files));
+    $('question').oninput = refresh;
+    document.querySelectorAll('.suggestion').forEach(button => button.onclick = () => {$('question').value = button.textContent.replace(/ ↗$/, ''); $('question').focus(); refresh();});
+    $('question').onkeydown = e => {if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) {e.preventDefault(); if (!$('send').disabled) $('form').requestSubmit();}};
+    function appendMessage(role, text, sources = []) {
+      $('welcome').hidden = true;
+      const element = document.createElement('div'); element.className = `message ${role}`;
+      const label = document.createElement('span'); label.className = 'speaker'; label.textContent = role === 'user' ? '你' : 'CONTEXTFORGE';
+      const content = document.createElement('div'); content.textContent = text;
+      element.append(label, content);
+      if (sources.length) {
+        const list = document.createElement('div'); list.className = 'sources';
+        sources.forEach((source, index) => {const item = document.createElement('div'); item.textContent = `[${index + 1}] ${source.filename || '文档'}${source.page != null ? ` · 第 ${source.page} 页` : ''}${source.excerpt ? `\n${source.excerpt}` : ''}`; list.append(item);});
+        element.append(list);
+      }
+      $('messages').append(element); $('messages').scrollTop = $('messages').scrollHeight;
+      return element;
+    }
+    $('clear').onclick = () => {document.querySelectorAll('.message').forEach(e => e.remove()); $('welcome').hidden = false; showError('request-error', '');};
+    fetch(`${API_BASE}/api/health`).then(r => r.json()).then(data => {$('connection').textContent = data.configured ? `● ${data.provider === 'gemini' ? 'Gemini' : 'OpenAI'} 后端已连接` : `● 请配置 ${data.provider === 'gemini' ? 'Gemini' : 'OpenAI'} 密钥`;}).catch(() => {$('connection').textContent = '● 请启动 Python 后端';});
+    $('form').onsubmit = async e => {
+      e.preventDefault(); if (busy || !selected.length || !$('question').value.trim()) return;
+      const question = $('question').value.trim();
+      const form = new FormData(); form.append('question', question); selected.forEach(file => form.append('files', file));
+      busy = true; refresh(); $('send').textContent = '正在查阅…'; showError('request-error', '');
+      const controller = new AbortController(); const timeout = setTimeout(() => controller.abort(), 120000);
+      try {
+        const response = await fetch(`${API_BASE}/api/ask`, {method:'POST', body:form, signal:controller.signal});
+        if (!response.ok) {const detail = await response.json().catch(() => ({})); throw new Error(detail.error || `后端返回 HTTP ${response.status}`);}
+        const data = await response.json();
+        if (typeof data.answer !== 'string' || !data.answer.trim()) throw new Error('后端没有返回有效的 answer 字段。');
+        appendMessage('user', question); appendMessage('assistant', data.answer, Array.isArray(data.sources) ? data.sources.filter(s => s && typeof s === 'object') : []);
+        $('question').value = ''; $('connection').textContent = '● AI 已连接';
+      } catch (error) {
+        const message = error.name === 'AbortError' ? '请求超时，请稍后重试。' : error instanceof TypeError ? '无法连接 Python AI 后端。网页已就绪；启动本地后端并接通 /api/ask 后即可获得真实回答。' : error.message;
+        showError('request-error', message); $('connection').textContent = '● AI 请求未完成';
+      } finally {clearTimeout(timeout); busy = false; $('send').textContent = '提问 ↗'; refresh();}
+    };
+  </script>
+</body>
+</html>
